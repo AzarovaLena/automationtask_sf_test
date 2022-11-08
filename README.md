@@ -3,7 +3,7 @@
 
 ### Clone
 
-- Clone this repo to you local machine using: https://github.com/AzarovaLena/automationtask_sf.git
+- Clone this repo to you local machine using: https://github.com/AzarovaLena/automationtask_sf_test.git
 
 ### Setup
 
