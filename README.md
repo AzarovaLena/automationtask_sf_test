@@ -22,4 +22,5 @@ On your local PC you should have installed:
 
 > mvn allure:serve
 > 
-![](../Desktop/Screenshot 2022-11-08 at 16.07.39.png)
+
+<img width="804" alt="Screenshot 2022-11-08 at 16 07 39" src="https://user-images.githubusercontent.com/86263702/200597972-5625b7c3-c207-4338-9c1a-6d1b2d082531.png">
