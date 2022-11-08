@@ -3,13 +3,15 @@ package ui_pages;
 import driver.MainDriver;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import conf.ConfProperties;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 public class BasePage {
@@ -19,32 +21,29 @@ public class BasePage {
 
     protected BasePage() {
         this.driver = MainDriver.getDriver();
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         wait = new WebDriverWait(driver, 40);
         properties = ConfProperties.getProperties();
     }
 
     @Step("Navigating to page with URL: \"{0}\"")
-    protected void openPageByUrl() {
-       // log.debug("Navigate to URL: \"" + properties.getProperty("application.url") + "\"");
-        driver.get(properties.getProperty("application.url"));
+    protected void openPageByUrl(String key) {
+        log.debug("Navigate to URL: \"" + properties.getProperty(key) + "\"");
+        log.debug("All cookies deleting");
+        driver.manage().deleteAllCookies();
+        driver.get(properties.getProperty(key));
     }
 
-
-
-    protected void click(By element) {
-        driver.findElement(element).click();
+    @Step("Switch to new tab")
+    public void switchToNewTab(int tabNumber) {
+        List<String> browserTabs = new ArrayList<>(driver.getWindowHandles());
+        driver.switchTo().window(browserTabs.get(tabNumber));
     }
 
-    protected void sendKeys(By element, String text) {
-        driver.findElement(element).sendKeys(text);
-    }
-
-    protected String getText(By element) {
-       return driver.findElement(element).getText();
-    }
-
-    protected void moveToElement(WebElement element){
-        Actions builder = new Actions(driver);
-        builder.moveToElement(element).perform();
+    @Step("Open page by url in new tab")
+    protected void openPageByUrlNewTab(String key) {
+        ((JavascriptExecutor) driver).executeScript("window.open()");
+        switchToNewTab(1);
+        driver.get(properties.getProperty(key));
     }
 }

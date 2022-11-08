@@ -10,6 +10,9 @@ import conf.ConfProperties;
 public class MainDriver {
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
 
+    private MainDriver() {
+    }
+
     public static void setDriver() {
         if (driver.get() == null) {
             createDriver();

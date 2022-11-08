@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="currencyExchangeCalculator" parallel="tests">
-
-    <test name="checkCurrencyExchangeBlock">
+    <parameter name="env" value="conf"/>
+    <test name="checkCurrencyExchangeBlock" enabled="false">
         <classes>
-            <class name="webPagesTest.CurrencyExchangeBlockTest">
+            <class name="ui_pages.accountTests.AccountTests">
             </class>
         </classes>
     </test>
-
-
 </suite>
